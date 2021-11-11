@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+    
+        <!-- Navigation-->
+        
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('assets/img/post-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                            
+                                    <!-- Title/author/date-->
+
+                            <h1><?= $items['Title']?></h1>
+                            <h2 class="subheading"><?= $items['Name']?></h2>
+                            <span class="meta">
+                                Posted by
+                               <?= $items['FirstName']." ".$items['LastName'] ?>
+                                on <?= $items['DATE']?>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Post Content-->
+        <article class="container mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+
+                                <!-- contenue-->
+
+                        <p><?= $items['text']?></p>
+                    </div>
+                    <div id="comment" class="col-md-10 col-lg-8 col-xl-7">
+                        
+                    <h2 class="mt-4 mb-4">Liste des commentaires (<?= $nbr /*count($comments)*/ ;?>)</h2>
+                    <ul>
+                        <?php foreach($comments as $comment): ?>
+                        <li><i class="fas fa-comment"></i> Rédiger par <?= htmlspecialchars($comment['NickName']);?>
+                            <br>
+                            <?= htmlspecialchars($comment['Contents']) ;?>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                    </div>
+                    <hr class="my-4" />
+                    <form action="comment.php" method="post">
+                        <legend><h3>Nouveau commentaire</h3></legend>
+                        <input type="hidden" name="post_id" value="<?=$items['idpost'];?>">
+                        <div class="mb-3">
+                            <label  class="form-label">Pseudo</label>
+                            <input type="text" name="pseudo" class="form-control">
+                            
+                            <label class="form-label">Commentaire</label>
+                            <textarea class="form-control" name="comment" rows="3"></textarea>
+
+                            <button type="submit" class="mt-4 btn btn-dark">Ajouter</button>
+                            <button type="reset" class="mt-4 btn btn-secondary">Annuler</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </article>  
+
+        
+</html>

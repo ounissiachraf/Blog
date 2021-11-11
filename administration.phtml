@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+        <!-- Navigation-->
+        
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+            <p>Administration/gestion des articles</p>
+
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>Gestion des articles</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                   
+                <button type="button" onclick="window.location.href = 'newarticle.php';" class="btn btn-primary mb-4"><i class="fas fa-plus"></i> Créer un article</button>
+                
+                <table class="table">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Création</th>
+                            <th>Titre</th>
+                            <th>Auteur</th>
+                            <th>Catégorie</th>
+                            <th>Modifier</th>
+                            <th>Supprimer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($articles as $article): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($article['ID']); ?></td>
+                                <td><?= htmlspecialchars($article['DATE']); ?></td>
+                                <td><?= htmlspecialchars($article['Title']); ?></td>
+                                <td><?= htmlspecialchars($article['FirstName'])." ".htmlspecialchars($article['LastName']); ?></td>
+                                <td><?= htmlspecialchars($article['Name']); ?></td>
+                                <td>
+                                    <form action="modifier.php" method="post">
+                                        <input type="hidden" name='id' value="<?= htmlspecialchars($article['ID']); ?>"/>
+                                        <button type="submit"><i class="fas fa-pen-nib"></i></button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form  action="" method="post">
+                    
+                                        <input type="hidden" name='id' value="<?= htmlspecialchars($article['ID']); ?>"/>
+                                        
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                        <i class="fas fa-trash-alt"></i>
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Voulez-vous supprimer cet article</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                L'article supprimé n'est plus récupérable !!
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                                                <button id="confirm" type="submit" class="btn btn-primary">Confirmer</button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        
+                                        <!--<button id="supp" type="submit"><i class="fas fa-trash-alt"></i></button>
+                                        <script>
+                                            $("#supp").click(function (event){
+                                                if(!confirm("Voulez vous faire cette action?"))
+                                                    event.preventDefault();
+                                            });
+                                        </script>-->
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>    
+                <p>Liste des posts classés par ordre chronologique inversé <strong>(<?= $NBR; ?> articles au total)</strong></p>
+                </div>
+            </div>
+        </div>
+               
+</html>
